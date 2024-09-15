@@ -33,6 +33,18 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             // Connect the client to the server	(optional starting in v4.7)
+            const Furniture_HomeDB = client.db("Furniture_HomeDB");
+            const BestSellingCollection = Furniture_HomeDB.collection("best_selling");
+            const CategoryCollection = Furniture_HomeDB.collection("furniture_category");
+            //Read data from mongoDB
+            app.get("/best_selling", (req, res) => __awaiter(this, void 0, void 0, function* () {
+                const result = yield BestSellingCollection.find().toArray();
+                res.send(result);
+            }));
+            app.get('/category', (req, res) => __awaiter(this, void 0, void 0, function* () {
+                const result = yield CategoryCollection.find().toArray();
+                res.send(result);
+            }));
             yield client.connect();
             // Send a ping to confirm a successful connection
             yield client.db("admin").command({ ping: 1 });

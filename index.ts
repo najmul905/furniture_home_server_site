@@ -27,6 +27,20 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
+    const Furniture_HomeDB=client.db("Furniture_HomeDB")
+    const BestSellingCollection=Furniture_HomeDB.collection("best_selling")
+    const CategoryCollection=Furniture_HomeDB.collection("furniture_category")
+    
+    //Read data from mongoDB
+    app.get("/best_selling",async(req:Request,res:Response)=>{
+        const result=await BestSellingCollection.find().toArray()
+        res.send(result)
+    })
+    app.get('/category',async(req:Request,res:Response)=>{
+      const result =await CategoryCollection.find().toArray()
+      res.send(result)
+    }) 
+
 
     await client.connect();
     // Send a ping to confirm a successful connection
