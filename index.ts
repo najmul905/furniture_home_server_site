@@ -35,6 +35,8 @@ async function run() {
     const LatestProductsCollection=Furniture_HomeDB.collection("latest_products")
     const OrderProductsCollection=Furniture_HomeDB.collection("orderProducts")
     const usersCollection=Furniture_HomeDB.collection("users")
+    const usersGrowthCollection=Furniture_HomeDB.collection("user_growth")
+    const sales_growth_collection=Furniture_HomeDB.collection("sales_growth")
     
     //Read data from mongoDB
     app.get("/best_selling",async(req:Request,res:Response)=>{
@@ -118,6 +120,14 @@ async function run() {
     app.get("/orderProducts",async(req:Request,res:Response)=>{
       const getOrderProducts=await OrderProductsCollection.find().toArray()
       res.send(getOrderProducts)
+    }),
+    app.get("/users_growth",async(req:Request,res:Response)=>{
+      const getUsersGrowthData=await usersGrowthCollection.find().toArray()
+      res.send(getUsersGrowthData)
+    }),
+    app.get("/sales_growth",async(req:Request,res:Response)=>{
+      const get_sales_growth_data=await sales_growth_collection.find().toArray()
+      res.send(get_sales_growth_data)
     })
 
     await client.connect();

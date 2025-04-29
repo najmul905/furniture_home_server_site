@@ -41,6 +41,8 @@ function run() {
             const LatestProductsCollection = Furniture_HomeDB.collection("latest_products");
             const OrderProductsCollection = Furniture_HomeDB.collection("orderProducts");
             const usersCollection = Furniture_HomeDB.collection("users");
+            const usersGrowthCollection = Furniture_HomeDB.collection("user_growth");
+            const sales_growth_collection = Furniture_HomeDB.collection("sales_growth");
             //Read data from mongoDB
             app.get("/best_selling", (req, res) => __awaiter(this, void 0, void 0, function* () {
                 const result = yield BestSellingCollection.find().toArray();
@@ -122,7 +124,15 @@ function run() {
             app.get("/orderProducts", (req, res) => __awaiter(this, void 0, void 0, function* () {
                 const getOrderProducts = yield OrderProductsCollection.find().toArray();
                 res.send(getOrderProducts);
-            }));
+            })),
+                app.get("/users_growth", (req, res) => __awaiter(this, void 0, void 0, function* () {
+                    const getUsersGrowthData = yield usersGrowthCollection.find().toArray();
+                    res.send(getUsersGrowthData);
+                })),
+                app.get("/sales_growth", (req, res) => __awaiter(this, void 0, void 0, function* () {
+                    const get_sales_growth_data = yield sales_growth_collection.find().toArray();
+                    res.send(get_sales_growth_data);
+                }));
             yield client.connect();
             // Send a ping to confirm a successful connection
             yield client.db("admin").command({ ping: 1 });
