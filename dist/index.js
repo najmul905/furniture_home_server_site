@@ -133,10 +133,10 @@ function run() {
                     const get_sales_growth_data = yield sales_growth_collection.find().toArray();
                     res.send(get_sales_growth_data);
                 }));
-            yield client.connect();
+            // await client.connect();
             // Send a ping to confirm a successful connection
-            yield client.db("admin").command({ ping: 1 });
-            console.log("Pinged your deployment. You successfully connected to MongoDB!");
+            // await client.db("admin").command({ ping: 1 });
+            // console.log("Pinged your deployment. You successfully connected to MongoDB!");
         }
         finally {
             // Ensures that the client will close when you finish/error
